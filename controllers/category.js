@@ -67,3 +67,5 @@ exports.list = (req, res) => {
     res.json(data);
   });
 };
+
+//sell/arrival(MOST POPULAR)
