@@ -2,7 +2,6 @@ const User = require("../models/user");
 const jwt = require("jsonwebtoken"); // to genrate token
 const expressJwt = require("express-jwt"); // for authorizarion check
 const { errorHandler } = require("../helpers/dbErrorHandler");
-const { use } = require("../routes/auth");
 
 exports.signup = (req, res) => {
   console.log("req.body", req.body);
