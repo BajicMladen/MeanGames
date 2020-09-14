@@ -4,7 +4,7 @@ import { isAuthenticated } from "../auth/index";
 import { Link } from "react-router-dom";
 const AdminDashboard = () => {
   const {
-    user: { _id, name, lastname, email, role },
+    user: { name, lastname, email, role },
   } = isAuthenticated();
 
   const adminLinks = () => {

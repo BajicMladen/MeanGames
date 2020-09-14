@@ -3,6 +3,7 @@ import Layout from "./Layout";
 import { API } from "../config";
 import { getProducts } from "./apiCore";
 import Card from "./Card";
+import Search from "./Search";
 
 const Home = () => {
   const [productsBySell, setProductsBySell] = useState([]);
@@ -35,6 +36,7 @@ const Home = () => {
 
   return (
     <Layout title="Home Page" description="MeanGames" className="container">
+      <Search></Search>
       <h2 className="mb-3">Best Sellers</h2>
       <div className="row">
         {productsBySell.map((product, i) => (

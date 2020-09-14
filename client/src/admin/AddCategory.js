@@ -52,7 +52,7 @@ const AddCatrgory = () => {
 
   const showSucces = () => {
     if (success) {
-      return <h3 className="text-success">{name}category is created</h3>;
+      return <h3 className="text-success">{name} category is created!</h3>;
     }
   };
 

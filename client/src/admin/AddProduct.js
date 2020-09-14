@@ -77,7 +77,7 @@ const AddProduct = () => {
           photo: "",
           quantity: "",
           shipping: "",
-          loading: "false",
+          loading: false,
           createProduct: data.name,
         });
       }
@@ -88,7 +88,7 @@ const AddProduct = () => {
     <form className="mb-3" onSubmit={clickSubmit}>
       <h4>Post Photo</h4>
       <div className="form-group">
-        <label className="">
+        <label className="btn btn-secondry">
           <input
             onChange={handleChange("photo")}
             type="file"
