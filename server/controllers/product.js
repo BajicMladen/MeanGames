@@ -199,13 +199,13 @@ exports.listBySearch = (req, res) => {
   let findArgs = {};
 
   for (let key in req.body.filters) {
-    if (req.body.filders[key].length > 0) {
+    if (req.body.filters[key].length > 0) {
       if (key === "price") {
         // gte -  greater than price [0-10]
         // lte - less than
         findArgs[key] = {
           $gte: req.body.filters[key][0],
-          $ite: req.body.filters[key][1],
+          $lte: req.body.filters[key][1],
         };
       } else {
         findArgs[key] = req.body.filters[key];
@@ -223,6 +223,7 @@ exports.listBySearch = (req, res) => {
       if (err) {
         return res.status(400).json({
           error: "products not found",
+          err,
         });
       }
       res.json({
