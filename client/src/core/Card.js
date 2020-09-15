@@ -38,6 +38,9 @@ const Card = ({ product, showViewProductButton = true }) => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          background: "indigo",
+          color: "#fff",
+          fontweight: "bold",
         }}
       >
         <h3>{product.name}</h3>
