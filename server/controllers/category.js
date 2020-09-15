@@ -1,6 +1,5 @@
-const Category = require("../models/category");
 const { errorHandler } = require("../helpers/dbErrorHandler");
-const { json } = require("body-parser");
+const Category = require("../models/category");
 
 exports.categoryById = (req, res, next, id) => {
   Category.findById(id).exec((err, category) => {
@@ -67,5 +66,3 @@ exports.list = (req, res) => {
     res.json(data);
   });
 };
-
-//sell/arrival(MOST POPULAR)

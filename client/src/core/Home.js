@@ -40,7 +40,9 @@ const Home = () => {
       <h2 className="mb-3">Best Sellers</h2>
       <div className="row">
         {productsBySell.map((product, i) => (
-          <Card key={i} product={product} />
+          <div key={i} className="col-3 mb-3">
+            <Card product={product} />
+          </div>
         ))}
       </div>
       <br></br>
@@ -50,7 +52,9 @@ const Home = () => {
       <h2 className="mb-4">New Games</h2>
       <div className="row">
         {productsByArrival.map((product, i) => (
-          <Card key={i} product={product} />
+          <div key={i} className="col-3 mb-3">
+            <Card product={product} />
+          </div>
         ))}
       </div>
     </Layout>

@@ -5,15 +5,17 @@ const fs = require("fs");
 const { errorHandler } = require("../helpers/dbErrorHandler");
 
 exports.productById = (req, res, next, id) => {
-  Product.findById(id).exec((err, product) => {
-    if (err || !product)
-      return res.status(400).json({
-        error: "Product not found",
-      });
-
-    req.product = product;
-    next();
-  });
+  Product.findById(id)
+    .populate("category")
+    .exec((err, product) => {
+      if (err || !product) {
+        return res.status(400).json({
+          error: "Product not found",
+        });
+      }
+      req.product = product;
+      next();
+    });
 };
 
 exports.read = (req, res) => {
@@ -146,7 +148,7 @@ exports.list = (req, res) => {
 
   Product.find()
     .select("-photo")
-    .populate("Category")
+    .populate("category")
     .sort([[sortBy, order]])
     .limit(limit)
     .exec((err, products) => {
@@ -168,7 +170,7 @@ exports.listRelated = (req, res) => {
   Product.find({ _id: { $ne: req.product }, category: req.product.category }) //ne-not included
     .limit(limit)
     .select("-photo")
-    .populate("Category", "_id name")
+    .populate("category", "_id name")
     .exec((err, products) => {
       if (err) {
         return res.status(400).json({
@@ -183,7 +185,7 @@ exports.listCategories = (req, res) => {
   Product.distinct("category", {}, (err, categories) => {
     if (err) {
       return res.status(400).json({
-        error: "Products not found",
+        error: "Categories not found",
       });
     }
 
@@ -215,7 +217,7 @@ exports.listBySearch = (req, res) => {
 
   Product.find(findArgs)
     .select("-photo")
-    .populate("Category")
+    .populate("category")
     .sort([[sortBy, order]])
     .skip(skip)
     .limit(limit)
