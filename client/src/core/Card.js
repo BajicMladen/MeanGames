@@ -1,14 +1,26 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, Redirect } from "react-router-dom";
 import ShowImage from "./ShowImage";
 import moment from "moment";
+import { addItem, updateItem, removeItem } from "./cartHelpers";
 
-const Card = ({ product, showViewProductButton = true }) => {
+const Card = ({
+  product,
+  showViewProductButton = true,
+  showAddToCartButton = true,
+  cartUpdate = false,
+  showRemoveProductButton = false,
+  setRun = (f) => f, // default value of function
+  run = undefined, // default value of undefined
+}) => {
+  const [redirect, setRedirect] = useState(false);
+  const [count, setCount] = useState(product.count);
+
   const showViewButton = (showViewProductButton) => {
     return (
       showViewProductButton && (
         <Link to={`/product/${product._id}`} className="mr-2">
-          <button className="btn btn-outline-primary mt-2 mb-2">
+          <button className="btn btn-outline-primary mt-2 mb-2 card-btn-1">
             View Product
           </button>
         </Link>
@@ -16,9 +28,44 @@ const Card = ({ product, showViewProductButton = true }) => {
     );
   };
 
-  const showAddToCardButton = () => {
+  const addToCart = () => {
+    addItem(product, () => {
+      setRedirect(true);
+    });
+  };
+
+  const shouldRedirect = (redirect) => {
+    if (redirect) {
+      return <Redirect to="/cart"></Redirect>;
+    }
+  };
+
+  const showAddToCartBtn = (showAddToCartButton) => {
     return (
-      <button className="btn btn-outline-warning mt-2 mb-2">Add to cart</button>
+      showAddToCartButton && (
+        <button
+          onClick={addToCart}
+          className="btn btn-outline-warning mt-2 mb-2 card-btn-1  "
+        >
+          Add to cart
+        </button>
+      )
+    );
+  };
+
+  const showRemoveBtn = (showRemoveProductButton) => {
+    return (
+      showRemoveProductButton && (
+        <button
+          onClick={() => {
+            removeItem(product._id);
+            setRun(!run);
+          }}
+          className="btn btn-outline-danger mt-2 mb-2 card-btn-1  "
+        >
+          Remove Product
+        </button>
+      )
     );
   };
 
@@ -29,6 +76,35 @@ const Card = ({ product, showViewProductButton = true }) => {
       <span className="badge badge-warning badge-pill">In Stock</span>
     );
   };
+
+  const handleChange = (productId) => (event) => {
+    setRun(!run);
+    setCount(event.target.value < 1 ? 1 : event.target.value);
+    if (event.target.value >= 1) {
+      updateItem(productId, event.target.value);
+    }
+  };
+
+  const showCartUpdateOptions = (cartUpdate) => {
+    return (
+      cartUpdate && (
+        <div>
+          <div className="input-group mb-3">
+            <div className="input-group-prepend">
+              <span className="input-group-text">Ajust Quantity: </span>
+            </div>
+            <input
+              type="number"
+              className="form-control"
+              value={count}
+              onChange={handleChange(product._id)}
+            ></input>
+          </div>
+        </div>
+      )
+    );
+  };
+
   return (
     <div className="card">
       <div
@@ -38,7 +114,7 @@ const Card = ({ product, showViewProductButton = true }) => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          background: "indigo",
+          background: "gray",
           color: "#fff",
           fontweight: "bold",
         }}
@@ -46,6 +122,7 @@ const Card = ({ product, showViewProductButton = true }) => {
         <h3>{product.name}</h3>
       </div>
       <div className="card-body">
+        {shouldRedirect(redirect)}
         <ShowImage item={product} url="product" />
         <p className="lead mt-2">
           {product.description.substring(0, 50) + "..."}
@@ -61,7 +138,11 @@ const Card = ({ product, showViewProductButton = true }) => {
 
         {showViewButton(showViewProductButton)}
 
-        {showAddToCardButton()}
+        {showAddToCartBtn(showAddToCartButton)}
+
+        {showRemoveBtn(showRemoveProductButton)}
+
+        {showCartUpdateOptions(cartUpdate)}
       </div>
     </div>
   );

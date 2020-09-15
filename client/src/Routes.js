@@ -11,12 +11,14 @@ import AddCatrgory from "./admin/AddCategory";
 import AddProduct from "./admin/AddProduct";
 import Shop from "./core/Shop";
 import Product from "./core/Product";
+import Cart from "./core/Cart";
 const Routes = () => {
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/shop" exact component={Shop} />
+        <Route path="/cart" exact component={Cart} />
         <Route path="/signin" exact component={Singin} />
         <Route path="/signup" exact component={Singup} />
         <PrivateRoute

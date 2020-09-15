@@ -33,16 +33,17 @@ const Product = (props) => {
 
   return (
     <Layout
-      title={product && product.name}
-      description={product && "Price: " + product.price + "€"}
+      title="MeanGames"
+      description="Don`t Blame The Game, Blame The Player !"
       className="container-fluid"
     >
       <div className="row">
-        <div className="col-7">
+        <div className="col-6">
           {product && product.description && (
             <Card product={product} showViewProductButton={false} />
           )}
         </div>
+        <div className="col-3"></div>
 
         <div className="col-3  ">
           {realtedProduct.map((p, i) => (
