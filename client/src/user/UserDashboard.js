@@ -4,7 +4,7 @@ import { isAuthenticated } from "../auth/index";
 import { Link } from "react-router-dom";
 const Dashboard = () => {
   const {
-    user: { name, lastname, email, role },
+    user: { _id, name, lastname, email, role },
   } = isAuthenticated();
 
   const userLinks = () => {
@@ -18,7 +18,7 @@ const Dashboard = () => {
             </Link>
           </li>
           <li className="list-group-item">
-            <Link to="/profile/update" className="nav-link">
+            <Link to={`/profile/${_id}`} className="nav-link">
               Update Profile
             </Link>
           </li>
