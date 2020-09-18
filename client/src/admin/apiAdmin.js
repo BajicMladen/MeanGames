@@ -142,7 +142,6 @@ export const updateProduct = (productId, userId, token, product) => {
     method: "PUT",
     headers: {
       Accept: "application/json",
-      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
     body: product,
@@ -152,3 +151,5 @@ export const updateProduct = (productId, userId, token, product) => {
     })
     .catch((err) => console.log(err));
 };
+
+//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
