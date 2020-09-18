@@ -14,6 +14,8 @@ import Product from "./core/Product";
 import Cart from "./core/Cart";
 import Orders from "./admin/Orders";
 import Profile from "./user/Profile";
+import MenageProducts from "./admin/MenageProducts";
+import ManageProducts from "./admin/MenageProducts";
 
 const Routes = () => {
   return (
@@ -45,6 +47,12 @@ const Routes = () => {
           path="/create/category"
           exact
           component={AddCatrgory}
+        ></AdminRoute>
+
+        <AdminRoute
+          path="/admin/products"
+          exact
+          component={ManageProducts}
         ></AdminRoute>
 
         <AdminRoute path="/admin/orders" exact component={Orders}></AdminRoute>
