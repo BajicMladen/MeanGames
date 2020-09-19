@@ -38,23 +38,31 @@ const Orders = () => {
   const showOrdersLength = (orders) => {
     if (orders.length > 0) {
       return (
-        <h1 className="text-danger display-2">Total orders: {orders.length}</h1>
+        <div className="text-center mb-4">
+          <h1 className="alert alert-secondary">
+            Total orders: {orders.length}
+          </h1>
+        </div>
       );
     } else {
-      return <h1 className="text-danger">No orders yet!</h1>;
+      return (
+        <div className="text-center mb-4">
+          <h1 className="alert alert-secondary">No orders yet!</h1>
+        </div>
+      );
     }
   };
 
   const showInput = (key, value) => {
     return (
-      <div className="input-group mb-2 mr-sm-2">
-        <div className="input-group-prepend">
+      <div className="input-group mb-2 mr-sm-2 text-center">
+        <div className="input-group">
           <div className="input-group-text">{key}</div>
         </div>
         <input
           type="text"
           value={value}
-          className="form-control"
+          className="custom-select my-1 mr-sm-2  border border-secondary"
           readOnly
         ></input>
       </div>
@@ -72,10 +80,10 @@ const Orders = () => {
   };
 
   const showStatus = (o) => (
-    <div className="form-group">
-      <h3 className="mark mb-4">Status: {o.status}</h3>
+    <div className="form-group text-center">
+      <h3 className="alert alert-primary">Status: {o.status}</h3>
       <select
-        className="form-control"
+        className="custom-select my-1 mr-sm-2  border border-secondary"
         onChange={(e) => handleStatusChange(e, o._id)}
       >
         <option>UpdateStatus</option>
@@ -91,8 +99,8 @@ const Orders = () => {
   return (
     <Layout
       title="Orders"
-      description={`Hi Admin ${user.name},please menage orders fast!`}
-      className=""
+      description={`Hi Admin ${user.name}, Please Menage Orders Fast!`}
+      className="container-fluid"
     >
       <div className="row">
         <div className="col-md-8 offset-md-2">
@@ -101,31 +109,42 @@ const Orders = () => {
           {orders.map((order, oIndex) => {
             return (
               <div
-                className="mt-5 mb-5"
+                className="mt-5 mb-5 text-center"
                 key={oIndex}
                 style={{ borderBottom: "5px solid gray" }}
               >
-                <h2 className="mb-5">
-                  <span className="bg-primary">Order ID: {order._id}</span>
+                <h2 className="m-3">
+                  <span className="alert alert-info">
+                    Order ID: {order._id}
+                  </span>
                 </h2>
 
-                <ul className="list-group mb-2">
-                  <li className="list-group-item">{showStatus(order)}</li>
-                  <li className="list-group-item">
-                    Transaction ID: {order.transaction_id}
+                <ul className="list-group border border-secondary">
+                  <li className="list-group-item border border-secondary">
+                    {showStatus(order)}
                   </li>
-                  <li className="list-group-item">Amount:{order.amount}</li>
-                  <li className="list-group-item">
-                    {`Ordered by: ${order.user.name} 
-                    ${order.user.lastname}`}
+                  <li className="list-group-item border border-secondary">
+                    <h5>Transaction ID: {order.transaction_id}</h5>
                   </li>
-                  <li className="list-group-item">
-                    Oredered:{moment(order.createdAt).fromNow()}
+                  <li className="list-group-item border border-secondary">
+                    <h5>Amount:{order.amount}</h5>
                   </li>
-                  <li className="list-group-item">Oredered:{order.address}</li>
+                  <li className="list-group-item border border-secondary">
+                    <h5>{`Ordered by: ${order.user.name} 
+                    ${order.user.lastname}`}</h5>
+                  </li>
+                  <li className="list-group-item border border-secondary">
+                    <h5> Oredered:{moment(order.createdAt).fromNow()}</h5>
+                  </li>
+                  <li className="list-group-item border border-secondary">
+                    <h5> Order address:{order.address}</h5>
+                  </li>
                 </ul>
+
                 <h3 className="mt-4 mb-4 font-italic">
                   Total product in the order: {order.products.length}
+                  <br />
+                  Product/s info:
                 </h3>
 
                 {order.products.map((p, pIndex) => (

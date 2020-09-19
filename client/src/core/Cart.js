@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Layout from "./Layout";
-import { getCart, removeItem } from "./cartHelpers";
+import { getCart } from "./cartHelpers";
 import Card from "./Card";
 import { Link } from "react-router-dom";
 import Checkout from "./Checkout";
@@ -15,8 +15,10 @@ const Cart = () => {
 
   const showItems = (items) => {
     return (
-      <div>
-        <h2>You choose {`${items.length}`} games</h2>
+      <div className="text-center">
+        <h2 className="alert alert-secondary">
+          You picked {`${items.length}`} games!
+        </h2>
         <hr />
         {items.map((product, i) => (
           <Card
@@ -34,10 +36,13 @@ const Cart = () => {
   };
 
   const noItemsMessage = () => (
-    <h2>
-      Your cart is empty. <br />
-      <Link to="/shop">Buy something!</Link>
-    </h2>
+    <div className="text-center">
+      <h2>
+        Why is your cart empty? <br />
+        <br></br>
+        <Link to="/shop">{"----> BUY GAMES NOW! <----"}</Link>
+      </h2>
+    </div>
   );
 
   return (
@@ -51,8 +56,8 @@ const Cart = () => {
           {items.length > 0 ? showItems(items) : noItemsMessage()}
         </div>
 
-        <div className="col-6">
-          <h2 className="mb-4">Your cart summary</h2>
+        <div className="col-6 text-center alert alert-secondary">
+          <h2 className="m-4">Your cart summary</h2>
           <hr />
           <Checkout products={items} setRun={setRun} run={run}></Checkout>
         </div>

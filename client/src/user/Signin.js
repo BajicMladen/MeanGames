@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Layout from "../core/Layout";
 import { signin, authenticate, isAuthenticated } from "../auth/index";
 
@@ -37,29 +37,51 @@ const Signin = () => {
   };
 
   const singUpForm = () => (
-    <form>
-      <div className="form-group">
-        <label className="text-muted">E-mail</label>
-        <input
-          onChange={handleChange("email")}
-          type="email"
-          className="form-control"
-          value={email}
-        />
+    <div>
+      <div className="col-12 text-center">
+        <h1>Sign in</h1>
       </div>
-      <div className="form-group">
-        <label className="text-muted">Password</label>
-        <input
-          onChange={handleChange("password")}
-          type="password"
-          className="form-control"
-          value={password}
-        />
+      <div>
+        <form className="form-content">
+          <div className="form-group">
+            <label className="text-muted" to="">
+              E-mail:
+            </label>
+            <input
+              id="email"
+              onChange={handleChange("email")}
+              type="email"
+              className="form-control border border-secondary"
+              value={email}
+            />
+          </div>
+          <div className="form-group">
+            <label className="text-muted" to="password">
+              Password:
+            </label>
+            <input
+              id="password"
+              onChange={handleChange("password")}
+              type="password"
+              className="form-control border border-secondary"
+              value={password}
+            />
+          </div>
+          <div>
+            <button
+              onClick={clickSubmit}
+              className="btn btn-outline-secondary mr-4 "
+            >
+              Submit
+            </button>
+            <div className="d-inline te ml-4 text-secondary">
+              You dont have acc? What are you waiting for?{" "}
+              <Link to="/signup">Click here</Link>
+            </div>
+          </div>
+        </form>
       </div>
-      <button onClick={clickSubmit} className="btn btn-dark">
-        Submit
-      </button>
-    </form>
+    </div>
   );
 
   const showError = () => (
@@ -93,8 +115,8 @@ const Signin = () => {
 
   return (
     <Layout
-      title="Signin"
-      description="Signn to MeanGames"
+      title="Greetings"
+      description="Welcome to the world of games, mean games!"
       className="container col-md-8 offset-md-2"
     >
       {showLoading()}

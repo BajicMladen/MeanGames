@@ -48,7 +48,7 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
       <div>{showDropIn()}</div>
     ) : (
       <Link to="/signin">
-        <button className="btn btn-primary">Signin to buy</button>
+        <button className="btn btn-outline-primary">Sign in to buy</button>
       </Link>
     );
   };
@@ -114,11 +114,11 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
       <div onBlur={() => setData({ ...data, error: "" })}>
         {data.clientToken !== null && products.length > 0 ? (
           <div>
-            <div className="gorm-group mb-3">
+            <div className="gorm-group mb-3 text-center">
               <label className="text-muted">Delivery address:</label>
               <textarea
                 onChange={handleAdress}
-                className="form-control"
+                className="form-control border border-secondary"
                 value={data.address}
                 placeholder="Type your delivery address here..."
               />
@@ -131,10 +131,15 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
                 },
               }}
               onInstance={(instance) => (data.instance = instance)}
-            ></DropIn>
-            <button onClick={buy} className="btn btn-success btn-block">
-              Pay
-            </button>
+            />
+            {console.log(data.address)}
+            {data.address !== "" && data.address !== undefined ? (
+              <button onClick={buy} className="btn btn-outline-primary">
+                Pay
+              </button>
+            ) : (
+              <h2>U must insert address to buy!</h2>
+            )}
           </div>
         ) : null}
       </div>

@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../core/Layout";
 import { isAuthenticated } from "../auth/index";
-import {
-  getProduct,
-  getCategories,
-  updateProduct,
-  getProducts,
-} from "./apiAdmin";
+import { getProduct, getCategories, updateProduct } from "./apiAdmin";
 import { Redirect } from "react-router-dom";
 
 const UpdateProduct = ({ match }) => {
@@ -115,82 +110,92 @@ const UpdateProduct = ({ match }) => {
   };
 
   const newPostForm = () => (
-    <form className="mb-3" onSubmit={clickSubmit}>
-      <h4>Post Photo</h4>
-      <div className="form-group">
-        <label className="btn btn-secondry">
+    <div>
+      <div className="text-center mb-3">
+        <h1>Update Product</h1>
+      </div>
+      <form className="mb-3 form-content" onSubmit={clickSubmit}>
+        <h3>Update Photo</h3>
+        <div className="form-group">
           <input
+            className="btn btn-outline-secondary"
             onChange={handleChange("photo")}
             type="file"
             name="photo"
             accept="image/*"
           />
-        </label>
-      </div>
+        </div>
 
-      <div className="form-group">
-        <label className="text-muted">Name</label>
-        <input
-          onChange={handleChange("name")}
-          type="text"
-          className="form-control"
-          value={name}
-        ></input>
-      </div>
+        <div className="form-group">
+          <label className="text-muted">Name:</label>
+          <input
+            onChange={handleChange("name")}
+            type="text"
+            className="form-control border border-secondary"
+            value={name}
+          ></input>
+        </div>
 
-      <div className="form-group">
-        <label className="text-muted">Description</label>
-        <textarea
-          onChange={handleChange("description")}
-          className="form-control"
-          value={description}
-        />
-      </div>
+        <div className="form-group">
+          <label className="text-muted">Description</label>
+          <textarea
+            onChange={handleChange("description")}
+            className="form-control border border-secondary"
+            value={description}
+          />
+        </div>
 
-      <div className="form-group">
-        <label className="text-muted">Price</label>
-        <input
-          onChange={handleChange("price")}
-          type="number"
-          className="form-control"
-          value={price}
-        />
-      </div>
+        <div className="form-group">
+          <label className="text-muted">Price:</label>
+          <input
+            onChange={handleChange("price")}
+            type="number"
+            className="form-control border border-secondary"
+            value={price}
+          />
+        </div>
 
-      <div className="form-group">
-        <label className="text-muted">Category</label>
-        <select onChange={handleChange("category")} className="form-control">
-          <option>Select Category?</option>
-          {categories &&
-            categories.map((c, i) => (
-              <option key={i} value={c._id}>
-                {c.name}
-              </option>
-            ))}
-        </select>
-      </div>
+        <div className="form-group">
+          <label className="text-muted">Category:</label>
+          <select
+            onChange={handleChange("category")}
+            className="form-control border border-secondary"
+          >
+            <option>Select Category?</option>
+            {categories &&
+              categories.map((c, i) => (
+                <option key={i} value={c._id}>
+                  {c.name}
+                </option>
+              ))}
+          </select>
+        </div>
 
-      <div className="form-group">
-        <label className="text-muted">Shipping</label>
-        <select onChange={handleChange("shipping")} className="form-control">
-          <option>Shipping?</option>
-          <option value="0">NO</option>
-          <option value="1">YES</option>
-        </select>
-      </div>
+        <div className="form-group">
+          <label className="text-muted">Shipping:</label>
+          <select
+            onChange={handleChange("shipping")}
+            className="form-control border border-secondary"
+          >
+            <option>Shipping?</option>
+            <option value="0">NO</option>
+            <option value="1">YES</option>
+          </select>
+        </div>
 
-      <div className="form-group">
-        <label className="text-muted">Quantity</label>
-        <input
-          onChange={handleChange("quantity")}
-          type="number"
-          className="form-control"
-          value={quantity}
-        ></input>
-      </div>
+        <div className="form-group">
+          <label className="text-muted">Quantity:</label>
+          <input
+            onChange={handleChange("quantity")}
+            type="number"
+            className="form-control border border-secondary"
+            value={quantity}
+          ></input>
+        </div>
 
-      <button className="btn btn-outline-primary">Update Product</button>
-    </form>
+        <button className="btn btn-outline-primary">Update Product</button>
+      </form>
+    </div>
   );
 
   const showError = () => (

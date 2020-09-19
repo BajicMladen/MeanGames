@@ -29,8 +29,6 @@ exports.create = (req, res) => {
         error: errorHandler(error),
       });
     }
-    // User.find({ categories: { $in: categories } }).exec((err, users) => {}
-    console.log("ORDER IS JUST SAVED >>> ", order);
     // send email alert to admin
     // order.address
     // order.products.length
@@ -40,28 +38,29 @@ exports.create = (req, res) => {
       from: "denmlabajic@gmail.com",
       subject: `A new order is received`,
       html: `
-          <h1>Hey Admin, Somebody just made a purchase in your ecommerce store</h1>
-          <h2>Customer name: ${order.user.name}</h2>
-          <h2>Customer address: ${order.address}</h2>
-          <h2>User's purchase history: ${
+          <h2>Hey Admin, Somebody just made a purchase in your MeanGame e-store</h2>
+          <h3>Customer name: ${order.user.name}</h3>
+          <h3>Customer address: ${order.address}</h3>
+          <h3>User's purchase history: ${
             order.user.history.length
-          } purchase</h2>
-          <h2>User's email: ${order.user.email}</h2>
-          <h2>Total products: ${order.products.length}</h2>
-          <h2>Transaction ID: ${order.transaction_id}</h2>
-          <h2>Order status: ${order.status}</h2>
-          <h2>Product details:</h2>
+          } purchase</h3>
+          <h3>User's email: ${order.user.email}</h3>
+          <h3>Total products: ${order.products.length}</h3>
+          <h3>Transaction ID: ${order.transaction_id}</h3>
+          <h3>Order status: ${order.status}</h3>
+          <h3>Product details:</h3>
           <hr />
+          <hr/>
           ${order.products
             .map((p) => {
               return `<div>
-                      <h3>Product Name: ${p.name}</h3>
-                      <h3>Product Price: ${p.price}</h3>
-                      <h3>Product Quantity: ${p.count}</h3>
+                      <h4>Product Name: ${p.name}</h4>
+                      <h4>Product Price: ${p.price}</h4>
+                      <h4>Product Quantity: ${p.count}</h4>
               </div>`;
             })
             .join("--------------------")}
-          <h2>Total order cost: ${order.amount}<h2>
+          <h3>Total order cost: ${order.amount}</h3>
           <p>Login to your dashboard</a> to see the order in detail.</p>
       `,
     };
@@ -74,25 +73,29 @@ exports.create = (req, res) => {
     const emailData2 = {
       to: order.user.email,
       from: "denmlabajic@gmail.com",
-      subject: `You order is in process`,
+      subject: `You order is in process!`,
       html: `
-          <h1>Hey ${req.profile.name}, Thank you for shopping with us.</h1>
-          <h2>Total products: ${order.products.length}</h2>
-          <h2>Transaction ID: ${order.transaction_id}</h2>
-          <h2>Order status: ${order.status}</h2>
-          <h2>Product details:</h2>
+          <h2>Hey ${
+            req.profile.name
+          }, Thank you for shopping with MeanGames.</h2>
+          <h3>Total products: ${order.products.length}</h3>
+          <h3>Transaction ID: ${order.transaction_id}</h3>
+          <h3>Order status: ${order.status}</h3>
+          <h3>Product details:</h3>
+          <hr />
           <hr />
           ${order.products
             .map((p) => {
               return `<div>
-                      <h3>Product Name: ${p.name}</h3>
-                      <h3>Product Price: ${p.price}</h3>
-                      <h3>Product Quantity: ${p.count}</h3>
+                      <h4>Product Name: ${p.name}</h4>
+                      <h4>Product Price: ${p.price}</h4>
+                      <h4>Product Quantity: ${p.count}</h4>
               </div>`;
             })
             .join("--------------------")}
-          <h2>Total order cost: ${order.amount}<h2>
-          <p>Thank your for shopping with us.</p>
+          <h3>Total order cost: ${order.amount}</h3>
+          <p>Thank your for shopping with MeanGames.</p>
+          <hr/>
       `,
     };
     sgMail

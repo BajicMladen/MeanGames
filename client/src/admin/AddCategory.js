@@ -16,6 +16,7 @@ const AddCatrgory = () => {
   const handleChange = (e) => {
     setError("");
     setName(e.target.value);
+    setSuccess(false);
   };
   const clickSubmit = (e) => {
     e.preventDefault();
@@ -34,20 +35,27 @@ const AddCatrgory = () => {
   };
 
   const newCategoryForm = () => (
-    <form onSubmit={clickSubmit}>
-      <div className="form-group">
-        <label className="text-muted">Category Name</label>
-        <input
-          type="text"
-          className="form-control"
-          onChange={handleChange}
-          value={name}
-          autoFocus
-          required
-        />
+    <div>
+      <div className="text-center mb-3">
+        <h1>Add Category</h1>
       </div>
-      <button className="btn btn-outline-primary">Create Category</button>
-    </form>
+
+      <form onSubmit={clickSubmit}>
+        <div className="form-group">
+          <label className="text-muted">Category Name</label>
+          <input
+            type="text"
+            className="form-control border border-secondary"
+            onChange={handleChange}
+            value={name}
+            autoFocus
+            required
+            placeholder=" Enter category name here..."
+          />
+        </div>
+        <button className="btn btn-outline-primary">Create Category</button>
+      </form>
+    </div>
   );
 
   const showSucces = () => {
@@ -60,7 +68,7 @@ const AddCatrgory = () => {
     if (error) {
       return (
         <h3 className="text-danger">
-          {name} alredy exist, it shoul be unique!
+          {name} alredy exist, category shoul be unique!
         </h3>
       );
     }
@@ -69,15 +77,15 @@ const AddCatrgory = () => {
   const goBack = () => (
     <div className="mt-5">
       <Link to="/admin/dashboard" className="text-warning">
-        Back to profile
+        <h5>Back to profile</h5>
       </Link>
     </div>
   );
 
   return (
     <Layout
-      title="Add new category"
-      description={`Greetings ${user.name}, add something good please :)`}
+      title="RPG or FPS, That Is The Question! "
+      description={`Greetings ${user.name}, We Need More Categories!`}
     >
       <div className="row">
         <div className="col-md-8 offset-md-2">

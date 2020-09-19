@@ -20,32 +20,26 @@ exports.signup = (req, res) => {
 };
 
 exports.signin = (req, res) => {
-  //find user based on email
-
+  // find the user based on email
   const { email, password } = req.body;
   User.findOne({ email }, (err, user) => {
     if (err || !user) {
       return res.status(400).json({
-        err: "User with that email does not exist, please try again!",
+        error: "User with that email does not exist. Please sign up",
       });
     }
-
     // if user is found make sure the email and password match
-    // create auth method in user model
+    // create authenticate method in user model
     if (!user.authenticate(password)) {
       return res.status(401).json({
-        error: "User and email dont match",
+        error: "Email and password dont match, please try again!",
       });
     }
-    //generate and sign token with user id and secret
+    // generate a signed token with user id and secret
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
-
-    // give the token as "t" in cookie with exp date
-
+    // persist the token as 't' in cookie with expiry date
     res.cookie("t", token, { expire: new Date() + 9999 });
-
-    //return res with user and token to frontend client
-
+    // return response with user and token to frontend client
     const { _id, name, lastname, email, role } = user;
     return res.json({ token, user: { _id, email, name, lastname, role } });
   });
@@ -66,7 +60,7 @@ exports.isAuth = (req, res, next) => {
   let user = req.profile && req.auth && req.profile._id == req.auth._id;
   if (!user) {
     return res.status(403).json({
-      error: "Acces denied!",
+      error: "Access denied!",
     });
   }
 

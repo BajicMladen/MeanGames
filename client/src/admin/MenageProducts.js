@@ -34,20 +34,28 @@ const ManageProducts = () => {
   }, []);
 
   return (
-    <Layout title="Menage Products" description="Perform CRUD on products">
+    <Layout
+      title="Update or Delete,That Is The Question! "
+      description="Delete Old And Add Gold!"
+    >
+      <div className="text-center mb-4">
+        <h1>Delete or Update products</h1>
+      </div>
       <div className="row ">
         <div className="col-12">
           <ul className="list-group">
-            <h2 className="text-center">Total {products.length} products!</h2>
+            <h3 className="text-center  border-top border-secondary">
+              Total {products.length} products!
+            </h3>
             {products.map((p, i) => (
-              <li className="list-group-item d-flex justify-content-between align-items-center">
+              <li className="list-group-item d-flex justify-content-between align-items-center border border-secondary">
                 <strong>{p.name}</strong>
                 <Link to={`/admin/product/update/${p._id}`}>
-                  <span className="badge badge-warning badge-pill">Update</span>
+                  <span className="badge badge-warning badge">Update</span>
                 </Link>
                 <span
                   onClick={() => destroy(p._id)}
-                  className="badge badge-danger badge-pill"
+                  className="badge badge-danger badge"
                 >
                   Delete
                 </span>

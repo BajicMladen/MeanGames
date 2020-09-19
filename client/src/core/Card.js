@@ -71,9 +71,9 @@ const Card = ({
 
   const showStock = (quantity) => {
     return quantity > 0 ? (
-      <span className="badge badge-primary badge-pill">In Stock</span>
+      <span className="badge badge-primary ">In Stock</span>
     ) : (
-      <span className="badge badge-warning badge-pill">In Stock</span>
+      <span className="badge badge-warning ">In Stock</span>
     );
   };
 
@@ -88,51 +88,57 @@ const Card = ({
   const showCartUpdateOptions = (cartUpdate) => {
     return (
       cartUpdate && (
-        <div>
-          <div className="input-group mb-3">
-            <div className="input-group-prepend">
-              <span className="input-group-text">Ajust Quantity: </span>
-            </div>
-            <input
-              type="number"
-              className="form-control"
-              value={count}
-              onChange={handleChange(product._id)}
-            ></input>
-          </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <h5 className="m-3">Quantity:</h5>
+          <input
+            type="number"
+            className="form-control border border-secondary mt-0 "
+            value={count}
+            onChange={handleChange(product._id)}
+            style={{ width: "100px" }}
+          />
         </div>
       )
     );
   };
 
   return (
-    <div className="card">
+    <div className="card border border-secondary">
       <div
-        className="card-header"
+        className="card-header bg-info text-center font-weight-bold text-justify"
         style={{
           height: "100px",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          background: "gray",
-          color: "#fff",
-          fontweight: "bold",
         }}
       >
-        <h3>{product.name}</h3>
+        <h2>{product.name}</h2>
       </div>
-      <div className="card-body">
+      <div className="card-body text-center">
         {shouldRedirect(redirect)}
-        <ShowImage item={product} url="product" />
-        <p className="lead mt-2">
-          {product.description.substring(0, 50) + "..."}
-        </p>
-        <h4 className="black-10">{`${product.price}€`}</h4>
-        <h5 className="black-8">
+
+        <ShowImage item={product} url="product" className="black-10" />
+        {showStock(product.quantity)}
+        {showViewProductButton ? (
+          <p className="lead mt-2 black-9">
+            {product.description.substring(0, 50) + "..."}
+          </p>
+        ) : (
+          <p className="lead mt-2 black-9">{product.description}</p>
+        )}
+        <h4 className="black-8 mt-1">{`${product.price}€`}</h4>
+        <h5 className="black-7 mt-1">
           Category: {product && product.category && product.category.name}
         </h5>
-        {showStock(product.quantity)}
-        <p className="black-6">
+
+        <p className="black-5 mt-1">
           Added on {moment(product.createdAt).fromNow()}
         </p>
 

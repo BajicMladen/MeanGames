@@ -62,7 +62,7 @@ const Shop = () => {
     return (
       size > 0 &&
       size >= limit && (
-        <button onClick={loadMore} className="btn btn-warning mb-5">
+        <button onClick={loadMore} className="btn btn-outline-danger mb-5">
           Load More...
         </button>
       )
@@ -96,30 +96,36 @@ const Shop = () => {
 
   return (
     <Layout
-      title="Shop"
-      description="Greetengs,what do you need player?"
+      title="Non Stop Shop"
+      description="You Should Stop Playing The Game , Just To Buy Another One!"
       className="container-fluid"
     >
       <div className="row">
-        <div className="col-4">
-          <h4>Filter by categories</h4>
+        <div className="col-3 alert alert-secondary">
+          <div className="text-center ">
+            <h2 className="mb-1">Filters:</h2>
+            <hr />
+          </div>
+
+          <h3>Filter by categories:</h3>
           <ul>
             <Checkbox
               categories={categories}
               handleFilters={(filters) => handleFilters(filters, "category")}
             />
           </ul>
-
-          <h4>Filter by price</h4>
+          <hr />
+          <h3>Filter by price</h3>
           <div>
             <RadioBox
               prices={prices}
               handleFilters={(filters) => handleFilters(filters, "price")}
             />
           </div>
+          <hr />
         </div>
-        <div className="col-8">
-          <h2 className="mb-4">Products:</h2>
+        <div className="col-9 text-center">
+          <h2 className="mb-4 mt-0">Products:</h2>
           <hr />
           <div className="row">
             {filteredResults.map((product, i) => (

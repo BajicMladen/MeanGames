@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Layout from "./Layout";
-import { API } from "../config";
 import { getProducts } from "./apiCore";
 import Card from "./Card";
 import Search from "./Search";
@@ -35,12 +34,17 @@ const Home = () => {
   }, []);
 
   return (
-    <Layout title="Home Page" description="MeanGames" className="container">
+    <Layout
+      title="Game Page"
+      description="Ohh...I Mean..Home Page.."
+      className="container "
+    >
       <Search></Search>
-      <h2 className="mb-3">Best Sellers</h2>
+      <hr />
+      <h2 className="alert alert-secondary mb-4 text-center">Best Sellers</h2>
       <div className="row">
         {productsBySell.map((product, i) => (
-          <div key={i} className="col-3 mb-3">
+          <div key={i} className="col-4 mb-3">
             <Card product={product} />
           </div>
         ))}
@@ -49,10 +53,10 @@ const Home = () => {
       <hr></hr>
       <br></br>
 
-      <h2 className="mb-4">New Games</h2>
+      <h2 className="alert alert-secondary mb-4 text-center">New Games</h2>
       <div className="row">
         {productsByArrival.map((product, i) => (
-          <div key={i} className="col-3 mb-3">
+          <div key={i} className="col-4 mb-4">
             <Card product={product} />
           </div>
         ))}

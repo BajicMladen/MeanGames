@@ -20,6 +20,7 @@ const AddProduct = () => {
     createdProduct: "",
     redirectToProfile: false,
     formData: "",
+    success: false,
   });
 
   const {
@@ -27,14 +28,12 @@ const AddProduct = () => {
     description,
     price,
     categories,
-    category,
-    shipping,
     quantity,
     loading,
     error,
     createdProduct,
-    redirectToProfile,
     formData,
+    success,
   } = values;
 
   // load categoris and set formData
@@ -56,7 +55,7 @@ const AddProduct = () => {
   const handleChange = (name) => (event) => {
     const value = name === "photo" ? event.target.files[0] : event.target.value;
     formData.set(name, value);
-    setValues({ ...values, [name]: value });
+    setValues({ ...values, [name]: value, success: false });
   };
 
   const clickSubmit = (event) => {
@@ -78,89 +77,106 @@ const AddProduct = () => {
           shipping: "",
           loading: false,
           createProduct: data.name,
+          success: true,
         });
       }
     });
   };
 
-  const newPostForm = () => (
-    <form className="mb-3" onSubmit={clickSubmit}>
-      <h4>Post Photo</h4>
-      <div className="form-group">
-        <label className="btn btn-secondry">
-          <input
-            onChange={handleChange("photo")}
-            type="file"
-            name="photo"
-            accept="image/*"
-          />
-        </label>
-      </div>
+  const newPostForm = () => {
+    return (
+      <div>
+        <div className="text-center mb-3">
+          <h1>Add Product</h1>
+        </div>
+        <form className="mb-3 form-content" onSubmit={clickSubmit}>
+          <h3>Post Photo</h3>
+          <div className="form-group">
+            <input
+              className="btn btn-outline-secondary"
+              onChange={handleChange("photo")}
+              type="file"
+              name="photo"
+              accept="image/*"
+            />
+          </div>
 
-      <div className="form-group">
-        <label className="text-muted">Name</label>
-        <input
-          onChange={handleChange("name")}
-          type="text"
-          className="form-control"
-          value={name}
-        ></input>
-      </div>
+          <div className="form-group">
+            <label className="text-muted">Name:</label>
+            <input
+              onChange={handleChange("name")}
+              type="text"
+              className="form-control border border-secondary"
+              value={name}
+              placeholder=" Enter here..."
+            ></input>
+          </div>
 
-      <div className="form-group">
-        <label className="text-muted">Description</label>
-        <textarea
-          onChange={handleChange("description")}
-          className="form-control"
-          value={description}
-        />
-      </div>
+          <div className="form-group">
+            <label className="text-muted">Description:</label>
+            <textarea
+              onChange={handleChange("description")}
+              className="form-control border border-secondary"
+              value={description}
+              placeholder=" Enter here..."
+            />
+          </div>
 
-      <div className="form-group">
-        <label className="text-muted">Price</label>
-        <input
-          onChange={handleChange("price")}
-          type="number"
-          className="form-control"
-          value={price}
-        />
-      </div>
+          <div className="form-group">
+            <label className="text-muted">Price:</label>
+            <input
+              onChange={handleChange("price")}
+              type="number"
+              className="form-control border border-secondary"
+              value={price}
+              placeholder=" Enter here..."
+            />
+          </div>
 
-      <div className="form-group">
-        <label className="text-muted">Category</label>
-        <select onChange={handleChange("category")} className="form-control">
-          <option>Select Category?</option>
-          {categories &&
-            categories.map((c, i) => (
-              <option key={i} value={c._id}>
-                {c.name}
-              </option>
-            ))}
-        </select>
-      </div>
+          <div className="form-group">
+            <label className="text-muted">Category:</label>
+            <select
+              onChange={handleChange("category")}
+              className="form-control border border-secondary"
+            >
+              <option>Select Category?</option>
+              {categories &&
+                categories.map((c, i) => (
+                  <option key={i} value={c._id}>
+                    {c.name}
+                  </option>
+                ))}
+            </select>
+          </div>
 
-      <div className="form-group">
-        <label className="text-muted">Shipping</label>
-        <select onChange={handleChange("shipping")} className="form-control">
-          <option>Shipping?</option>
-          <option value="0">NO</option>
-          <option value="1">YES</option>
-        </select>
-      </div>
+          <div className="form-group">
+            <label className="text-muted">Shipping:</label>
+            <select
+              onChange={handleChange("shipping")}
+              className="form-control border border-secondary"
+            >
+              <option>Shipping?</option>
+              <option value="0">NO</option>
+              <option value="1">YES</option>
+            </select>
+          </div>
 
-      <div className="form-group">
-        <label className="text-muted">Quantity</label>
-        <input
-          onChange={handleChange("quantity")}
-          type="number"
-          className="form-control"
-          value={quantity}
-        ></input>
-      </div>
+          <div className="form-group">
+            <label className="text-muted">Quantity:</label>
+            <input
+              onChange={handleChange("quantity")}
+              type="number"
+              className="form-control border border-secondary"
+              value={quantity}
+              placeholder=" Enter here..."
+            ></input>
+          </div>
 
-      <button className="btn btn-outline-primary">Create Product</button>
-    </form>
-  );
+          <button className="btn btn-outline-primary">Create Product</button>
+        </form>
+      </div>
+    );
+  };
 
   const showError = () => (
     <div
@@ -172,11 +188,12 @@ const AddProduct = () => {
   );
 
   const showSuccess = () => (
-    <div
-      className="alert alert-info"
-      style={{ display: createdProduct ? "" : "none" }}
-    >
-      <h2>{`${createdProduct} is created!`}</h2>
+    <div className="alert alert">
+      {success ? (
+        <h2 className="alert alert-info">New product is created!</h2>
+      ) : (
+        ""
+      )}
     </div>
   );
 
@@ -189,8 +206,8 @@ const AddProduct = () => {
 
   return (
     <Layout
-      title="Add new product"
-      description={`Greetings ${user.name}, we want new games NOW :P`}
+      title="Add Something Good Please!"
+      description={`Greetings ${user.name}, we want new games NOW `}
     >
       <div className="row">
         <div className="col-md-8 offset-md-2">

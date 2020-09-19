@@ -28,8 +28,6 @@ const Search = () => {
   }, []);
 
   const searchData = () => {
-    console.log(search, category);
-
     if (search) {
       list({ search: search || undefined, category: category }).then(
         (response) => {
@@ -55,17 +53,19 @@ const Search = () => {
 
   const searchMessage = (serched, results) => {
     if (searched && results.length > 0) {
-      return `Found ${results.length} products`;
+      return `Found ${results.length} Products`;
     }
     if (searched && results.length < 1) {
-      return `No product found`;
+      return `There Is Not Such A Product!`;
     }
   };
 
   const searchedProducts = (results = []) => {
     return (
       <div>
-        <h2 className="mt-4 mb-4">{searchMessage(searched, results)}</h2>
+        <h2 className="mt-4 mb-4 text-center ">
+          {searchMessage(searched, results)}
+        </h2>
         <div className="row">
           {results.map((product, i) => (
             <div className="col-3 mb-3">
@@ -80,32 +80,37 @@ const Search = () => {
   const searchForm = () => {
     return (
       <form onSubmit={searchSubmit}>
-        <span className="input-group-text">
-          <div className="input-group input-group-lg">
-            <div className="input-group-prepend">
-              <select
-                className="btn btn-dark mr-2"
-                onChange={handleChange("category")}
-              >
-                <option value="All">All Categories</option>
-                {categories.map((c, i) => (
-                  <option key={i} value={c._id}>
-                    {c.name}
-                  </option>
-                ))}
-              </select>
-            </div>
+        <div className="text-center">
+          <h2 className="alert alert-secondary mb-4 text-center">Search</h2>
+        </div>
+        <div className="form-row input-group">
+          <div className="col-3 ml-4  border-secondary">
+            <select
+              className="custom-select my-1 mr-sm-2  border border-secondary"
+              onChange={handleChange("category")}
+            >
+              <option value="All">All Categories</option>
+              {categories.map((c, i) => (
+                <option key={i} value={c._id}>
+                  {c.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="col-6 ml-4">
             <input
               type="search"
-              className="form-control"
+              className="form-control my-1 mt-2 form-control border border-secondary "
               onChange={handleChange("search")}
               placeholder="Search by Name"
-            ></input>
+            />
           </div>
-          <div className="btn input-group-append" style={{ border: "none" }}>
-            <button className="input-group-text">Search</button>
+          <div className="col-2 ml-4">
+            <button className="btn btn-outline-secondary mt-1 my-1">
+              Search
+            </button>
           </div>
-        </span>
+        </div>
       </form>
     );
   };

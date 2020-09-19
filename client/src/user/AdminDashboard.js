@@ -9,29 +9,29 @@ const AdminDashboard = () => {
 
   const adminLinks = () => {
     return (
-      <div className="card">
+      <div className="card text-center">
         <h4 className="card-header">Admin Links</h4>
         <ul className="list-group">
-          <li className="list-group-item">
+          <li className="list-group-item border border-primary ">
             <Link to="/create/category" className="nav-link">
-              Create Category
+              <h5>Create Category</h5>
             </Link>
           </li>
-          <li className="list-group-item">
+          <li className="list-group-item ">
             <Link to="/create/product" className="nav-link">
-              Create Product
+              <h5>Create Product</h5>
             </Link>
           </li>
 
-          <li className="list-group-item">
+          <li className="list-group-item border border-primary">
             <Link to="/admin/products" className="nav-link">
-              Menage products
+              <h5>Manage Products</h5>
             </Link>
           </li>
 
           <li className="list-group-item">
             <Link to="/admin/orders" className="nav-link">
-              View Orders
+              <h5>View Orders</h5>
             </Link>
           </li>
         </ul>
@@ -41,13 +41,21 @@ const AdminDashboard = () => {
 
   const adminInfo = () => {
     return (
-      <div className="card mb-5">
+      <div className="card mb-5 border border-primary text-center">
         <h3 className="card-header">Admin Informations</h3>
         <ul className="list-group">
-          <li className="list-group-item">{name}</li>
-          <li className="list-group-item">{lastname}</li>
-          <li className="list-group-item">{email}</li>
-          <li className="list-group-item">{role === 1 ? "Admin" : "User"}</li>
+          <li className="list-group-item border border-primary">
+            <h5>{name}</h5>
+          </li>
+          <li className="list-group-item ">
+            <h5>{lastname}</h5>
+          </li>
+          <li className="list-group-item border border-primary">
+            <h5>{email}</h5>
+          </li>
+          <li className="list-group-item">
+            <h5>{role === 1 ? "Admin" : "User"}</h5>
+          </li>
         </ul>
       </div>
     );
