@@ -1,3 +1,5 @@
+/*ADD CATEGORY - ADMIN ROUTE*/
+
 import React, { useState } from "react";
 import Layout from "../core/Layout";
 import { isAuthenticated } from "../auth/index";
@@ -5,6 +7,7 @@ import { Link } from "react-router-dom";
 import { createCategory } from "./apiAdmin";
 
 const AddCatrgory = () => {
+  //States
   const [name, setName] = useState("");
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -22,7 +25,6 @@ const AddCatrgory = () => {
     e.preventDefault();
     setError("");
     setSuccess(false);
-    // request to api to create category
 
     createCategory(user._id, token, { name }).then((data) => {
       if (data.error) {
@@ -34,6 +36,7 @@ const AddCatrgory = () => {
     });
   };
 
+  /* category form */
   const newCategoryForm = () => (
     <div>
       <div className="text-center mb-3">
@@ -58,12 +61,14 @@ const AddCatrgory = () => {
     </div>
   );
 
+  /*Success message*/
   const showSucces = () => {
     if (success) {
       return <h3 className="text-success">{name} category is created!</h3>;
     }
   };
 
+  /*Error message*/
   const showError = () => {
     if (error) {
       return (
@@ -74,6 +79,7 @@ const AddCatrgory = () => {
     }
   };
 
+  /*After action*/
   const goBack = () => (
     <div className="mt-5">
       <Link to="/admin/dashboard" className="text-warning">

@@ -1,3 +1,5 @@
+/*SHOP PAGE WITH FILTER AND LOAD MORE*/
+
 import React, { useState, useEffect } from "react";
 import Layout from "./Layout";
 import Card from "./Card";
@@ -32,8 +34,8 @@ const Shop = () => {
     loadFilteredResults(skip, limit, myFilters.filters);
   }, []);
 
+  // filter buttons actions
   const loadFilteredResults = (newFilters) => {
-    console.log(newFilters);
     getFilteredProducts(skip, limit, newFilters).then((data) => {
       if (data.error) {
         setError(data.error);
@@ -44,7 +46,7 @@ const Shop = () => {
       }
     });
   };
-
+  //load more button
   const loadMore = () => {
     let toSkip = skip + limit;
     getFilteredProducts(toSkip, limit, myFilters.filters).then((data) => {

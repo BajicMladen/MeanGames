@@ -1,5 +1,5 @@
+/*CHECKOUT*/
 import React, { useState, useEffect } from "react";
-import Layout from "./Layout";
 import { isAuthenticated } from "../auth/index";
 import { Link } from "react-router-dom";
 import {
@@ -36,7 +36,7 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
   useEffect(() => {
     getToken(userId, token);
   }, []);
-
+  // get total amount for all product in cart
   const getTotal = () => {
     return products.reduce((currentValuem, nextValue) => {
       return currentValuem + nextValue.count * nextValue.price;
@@ -54,7 +54,7 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
   };
 
   let deliveryAdress = data.address;
-
+  // Buy action true payPal or credit card
   const buy = () => {
     //send nonce to server, nonce - data.instanc.req.PaymentMethod()
     setData({ loading: true });
@@ -108,7 +108,7 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
   const handleAdress = (event) => {
     setData({ ...data, address: event.target.value });
   };
-
+  //Address and address validation
   const showDropIn = () => {
     return (
       <div onBlur={() => setData({ ...data, error: "" })}>
@@ -145,7 +145,7 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
       </div>
     );
   };
-
+  //erroe message
   const showError = (error) => {
     return (
       <div
@@ -156,7 +156,7 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
       </div>
     );
   };
-
+  //show success message
   const showSuccess = (success) => {
     return (
       <div
@@ -167,7 +167,7 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
       </div>
     );
   };
-
+  // loading message
   const showLoading = (loading) =>
     loading && <h2 className="text-danger">Loading...</h2>;
 

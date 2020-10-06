@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Checkout from "./Checkout";
 
 const Cart = () => {
+  //States
   const [items, setItems] = useState([]);
   const [run, setRun] = useState(false);
 
@@ -13,6 +14,7 @@ const Cart = () => {
     setItems(getCart());
   }, [run]);
 
+  //Cart products
   const showItems = (items) => {
     return (
       <div className="text-center">
@@ -34,7 +36,7 @@ const Cart = () => {
       </div>
     );
   };
-
+  //empty cart message
   const noItemsMessage = () => (
     <div className="text-center">
       <h2>

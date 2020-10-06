@@ -1,3 +1,4 @@
+/*LAYOUT OF ALL PAGES AND BOTTOM*/
 import React from "react";
 import Menu from "./Menu";
 import "../style.css";

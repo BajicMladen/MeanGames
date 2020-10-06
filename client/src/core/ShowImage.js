@@ -1,6 +1,7 @@
 import React from "react";
 import { API } from "../config";
 
+//Show image in cart
 const ShowImage = ({ item, url }) => (
   <div className="product-img">
     <img

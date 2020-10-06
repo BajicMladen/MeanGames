@@ -1,3 +1,4 @@
+/*imports for routes */
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Singup from "./user/Signup";
@@ -17,6 +18,7 @@ import Profile from "./user/Profile";
 import ManageProducts from "./admin/MenageProducts";
 import UpdateProduct from "./admin/UpdateProduct";
 
+/*Route-simple route; PrivateRoute-authenticated route;AdminRoute- route for admin only*/
 const Routes = () => {
   return (
     <BrowserRouter>

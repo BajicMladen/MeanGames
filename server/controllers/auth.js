@@ -1,8 +1,11 @@
+/* MIDDLEWARES FOR AUTH ROUTES  */
+
 const User = require("../models/user");
 const jwt = require("jsonwebtoken"); // to genrate token
 const expressJwt = require("express-jwt"); // for authorizarion check
 const { errorHandler } = require("../helpers/dbErrorHandler");
 
+/*sign up  function*/
 exports.signup = (req, res) => {
   const user = new User(req.body);
   user.save((err, user) => {
@@ -18,6 +21,7 @@ exports.signup = (req, res) => {
   });
 };
 
+/*sign in  function*/
 exports.signin = (req, res) => {
   // find the user based on email
   const { email, password } = req.body;
@@ -44,6 +48,7 @@ exports.signin = (req, res) => {
   });
 };
 
+/*sign oout  function*/
 exports.signout = (req, res) => {
   res.clearCookie("t");
   res.json({ message: "Singout succes" });
@@ -55,6 +60,7 @@ exports.requireSignin = expressJwt({
   userProperty: "auth",
 });
 
+/*Check if user is authenticated*/
 exports.isAuth = (req, res, next) => {
   let user = req.profile && req.auth && req.profile._id == req.auth._id;
   if (!user) {
@@ -66,6 +72,7 @@ exports.isAuth = (req, res, next) => {
   next();
 };
 
+/*Check if user is admin*/
 exports.isAdmin = (req, res, next) => {
   if (req.profile.role === 0) {
     return res.status(403).json({

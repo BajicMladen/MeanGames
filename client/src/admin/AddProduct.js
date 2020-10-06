@@ -37,7 +37,6 @@ const AddProduct = () => {
   } = values;
 
   // load categoris and set formData
-
   const init = () => {
     getCategories().then((data) => {
       if (data.error) {
@@ -82,7 +81,7 @@ const AddProduct = () => {
       }
     });
   };
-
+  /* Product form */
   const newPostForm = () => {
     return (
       <div>
@@ -177,7 +176,7 @@ const AddProduct = () => {
       </div>
     );
   };
-
+  /*Error message*/
   const showError = () => (
     <div
       className="alert alert-danger"
@@ -186,7 +185,7 @@ const AddProduct = () => {
       <h2>{error}</h2>
     </div>
   );
-
+  /*Success message*/
   const showSuccess = () => (
     <div className="alert alert">
       {success ? (
@@ -196,7 +195,7 @@ const AddProduct = () => {
       )}
     </div>
   );
-
+  /*Loading message*/
   const showLoading = () =>
     loading && (
       <div className="alert alert-success">

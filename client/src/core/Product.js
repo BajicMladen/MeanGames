@@ -1,3 +1,4 @@
+/*PRODUCTS IN CARD LAYOUT*/
 import React, { useState, useEffect } from "react";
 import Layout from "./Layout";
 import { listRelated, read } from "./apiCore";

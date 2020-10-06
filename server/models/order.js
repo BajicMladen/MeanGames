@@ -1,3 +1,5 @@
+/* ORDER MONGOOSE MODEL  */
+
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const { ObjectId } = mongoose.Schema;
@@ -29,7 +31,7 @@ const OrderSchema = new mongoose.Schema(
         "Shipped",
         "Delivered",
         "Cancelled",
-      ], // enum means string objects
+      ], // enoum for all states of order
     },
     updated: Date,
     user: { type: ObjectId, ref: "User" },

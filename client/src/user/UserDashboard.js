@@ -1,3 +1,4 @@
+/* USER DASHBOARD */
 import React, { useEffect, useState } from "react";
 import Layout from "../core/Layout";
 import { isAuthenticated } from "../auth/index";
@@ -6,6 +7,7 @@ import moment from "moment";
 import { getPurchaseHistory } from "./apiUser";
 
 const Dashboard = () => {
+  //User states
   const [history, setHistory] = useState([]);
 
   const {
@@ -27,6 +29,7 @@ const Dashboard = () => {
     init(_id, token);
   }, []);
 
+  //Sidebar
   const userLinks = () => {
     return (
       <div className="card text-center">
@@ -46,7 +49,7 @@ const Dashboard = () => {
       </div>
     );
   };
-
+  //center of page info
   const userInfo = () => {
     return (
       <div className="card mb-5 text-center">
@@ -60,7 +63,7 @@ const Dashboard = () => {
       </div>
     );
   };
-
+  //USER PURCHASE HISTORY
   const purchaseHistory = (history) => {
     return (
       <div className="card mb-5 text-center">

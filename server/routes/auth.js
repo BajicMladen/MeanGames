@@ -1,5 +1,9 @@
+/* ROUTES FOR AUTHENTICATION WITH MIDDLEWARES*/
+
 const express = require("express");
 const router = express.Router();
+
+/* middlewares */
 const { userSignupValidator } = require("../validator/index");
 
 const {
@@ -9,10 +13,10 @@ const {
   requireSignin,
 } = require("../controllers/auth");
 
-router.post("/signup", userSignupValidator, signup);
+router.post("/signup", userSignupValidator, signup); // signup route
 
-router.post("/signin", signin);
+router.post("/signin", signin); // signin route
 
-router.get("/signout", signout);
+router.get("/signout", signout); //signout route
 
 module.exports = router;

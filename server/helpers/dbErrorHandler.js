@@ -1,5 +1,4 @@
-"use strict";
-
+/*ERROR HANDLER IS MIDDLEWARE FOR USER FRENDLY ERROR MESSAGE*/
 /**
  * Get unique error field name
  */

@@ -1,3 +1,5 @@
+// prica range for shop filtering
+
 export const prices = [
   {
     _id: 0,

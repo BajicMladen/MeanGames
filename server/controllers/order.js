@@ -1,3 +1,4 @@
+/* MIDDLEWARES FOR ORDER ROUTES  */
 const { Order, CartItem } = require("../models/order");
 const { errorHandler } = require("../helpers/dbErrorHandler");
 const sgMail = require("@sendgrid/mail");
@@ -5,6 +6,7 @@ sgMail.setApiKey(
   "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"
 );
 
+/* Param that run on call*/
 exports.orderById = (req, res, next, id) => {
   Order.findById(id)
     .populate("products.product", "name price")
@@ -19,6 +21,7 @@ exports.orderById = (req, res, next, id) => {
     });
 };
 
+/* Create order func*/
 exports.create = (req, res) => {
   console.log("CREATE ORDER: ", req.body);
   req.body.order.user = req.profile;
@@ -33,9 +36,10 @@ exports.create = (req, res) => {
     // order.address
     // order.products.length
     // order.amount
-    const emailData = {
-      to: "bajicmladen33@gmail.com", // admin
-      from: "denmlabajic@gmail.com",
+
+    /* const emailData = {
+      to: "", // admin email
+      from: "denmlabajic@gmail.com", // company email
       subject: `A new order is received`,
       html: `
           <h2>Hey Admin, Somebody just made a purchase in your MeanGame e-store</h2>
@@ -72,7 +76,7 @@ exports.create = (req, res) => {
     // email to buyer
     const emailData2 = {
       to: order.user.email,
-      from: "denmlabajic@gmail.com",
+      from: "", // email of admin(company)
       subject: `You order is in process!`,
       html: `
           <h2>Hey ${
@@ -102,6 +106,7 @@ exports.create = (req, res) => {
       .send(emailData2)
       .then((sent) => console.log("SENT 2 >>>", sent))
       .catch((err) => console.log("ERR 2 >>>", err));
+      */
 
     res.json(data);
   });

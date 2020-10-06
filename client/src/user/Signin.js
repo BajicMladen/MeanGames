@@ -4,9 +4,10 @@ import Layout from "../core/Layout";
 import { signin, authenticate, isAuthenticated } from "../auth/index";
 
 const Signin = () => {
+  //states
   const [values, setValues] = useState({
-    email: "mladen_ba@live.com",
-    password: "123456",
+    email: "",
+    password: "",
     error: "",
     loading: false,
     redirectToReferrer: false,
@@ -35,7 +36,7 @@ const Signin = () => {
       }
     });
   };
-
+  /* Sign up form */
   const singUpForm = () => (
     <div>
       <div className="col-12 text-center">
@@ -83,7 +84,7 @@ const Signin = () => {
       </div>
     </div>
   );
-
+  //error message
   const showError = () => (
     <div
       className="alert alert-danger"
@@ -92,14 +93,14 @@ const Signin = () => {
       {error}
     </div>
   );
-
+  //loading message
   const showLoading = () =>
     loading && (
       <div className="alert alert-info">
         <h2>Loading...</h2>
       </div>
     );
-
+  //after action
   const redirectUser = () => {
     if (redirectToReferrer) {
       if (user && user.role === 1) {

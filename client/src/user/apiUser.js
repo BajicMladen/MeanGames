@@ -1,5 +1,7 @@
+/* ALL REQUESTS FROM USER*/
 import { API } from "../config";
 
+// get user
 export const read = (userId, token) => {
   return fetch(`${API}/user/${userId}`, {
     method: "GET",
@@ -17,6 +19,7 @@ export const read = (userId, token) => {
     });
 };
 
+//update user
 export const update = (userId, token, user) => {
   return fetch(`${API}/user/${userId}`, {
     method: "PUT",
@@ -34,7 +37,7 @@ export const update = (userId, token, user) => {
       console.log(error);
     });
 };
-
+// local storage get user
 export const updateUser = (user, next) => {
   if (typeof window !== "undefined") {
     if (localStorage.getItem("jwt")) {
@@ -45,7 +48,7 @@ export const updateUser = (user, next) => {
     }
   }
 };
-
+// list of purchase history
 export const getPurchaseHistory = (userId, token) => {
   return fetch(`${API}/orders/by/user/${userId}`, {
     method: "GET",

@@ -1,3 +1,4 @@
+/* ADMIN MENAGE PRODUCTS FROM DASHBOARD */
 import React, { useState, useEffect } from "react";
 import Layout from "../core/Layout";
 import { isAuthenticated } from "../auth/index";
@@ -19,6 +20,7 @@ const ManageProducts = () => {
 
   const { user, token } = isAuthenticated();
 
+  //delete product
   const destroy = (productId) => {
     deleteProduct(productId, user._id, token).then((data) => {
       if (data.error) {

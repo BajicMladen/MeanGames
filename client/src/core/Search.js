@@ -3,6 +3,7 @@ import { getCategories, list } from "./apiCore";
 import Card from "./Card";
 
 const Search = () => {
+  //states
   const [data, setData] = useState({
     categories: [],
     category: "",
@@ -50,7 +51,7 @@ const Search = () => {
   const handleChange = (name) => (event) => {
     setData({ ...data, [name]: event.target.value, searched: false });
   };
-
+  //Messge after search acion
   const searchMessage = (serched, results) => {
     if (searched && results.length > 0) {
       return `Found ${results.length} Products`;
@@ -59,7 +60,7 @@ const Search = () => {
       return `There Is Not Such A Product!`;
     }
   };
-
+  //Search feature on home page
   const searchedProducts = (results = []) => {
     return (
       <div>
@@ -77,6 +78,7 @@ const Search = () => {
     );
   };
 
+  //Search form on home page
   const searchForm = () => {
     return (
       <form onSubmit={searchSubmit}>

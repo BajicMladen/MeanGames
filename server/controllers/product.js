@@ -1,9 +1,11 @@
+/* MIDDLEWARES FOR PRODUCT ROUTES  */
 const Product = require("../models/product");
 const formidable = require("formidable");
 const _ = require("lodash");
 const fs = require("fs");
 const { errorHandler } = require("../helpers/dbErrorHandler");
 
+/* Param that run on call*/
 exports.productById = (req, res, next, id) => {
   Product.findById(id)
     .populate("category")
@@ -18,11 +20,12 @@ exports.productById = (req, res, next, id) => {
     });
 };
 
+/* Read procuct*/
 exports.read = (req, res) => {
   req.product.photo = undefined;
   return res.json(req.product);
 };
-
+/* Create product*/
 exports.create = (req, res) => {
   let form = new formidable.IncomingForm();
   form.keepExtensions = true;
@@ -51,8 +54,8 @@ exports.create = (req, res) => {
     let product = new Product(fields);
 
     if (files.photo) {
-      //console.log("FILE PHOTO:",files.photo)
       if (files.photo.size > 1000000) {
+        // size of photo
         return res.status(400).json({
           error: "Image is too large, it should be less than one mb",
         });
@@ -72,6 +75,7 @@ exports.create = (req, res) => {
   });
 };
 
+/* Remove product*/
 exports.remove = (req, res) => {
   let product = req.product;
   product.remove((err, deleted) => {
@@ -94,6 +98,8 @@ exports.update = (req, res) => {
       return res.status(400).json({
         error: "Image could not bee uploaded",
       });
+
+    // validation commnted because of update product function
     // const { name, description, price, category, quantity, shipping } = fields;
 
     // if (
@@ -193,6 +199,7 @@ exports.listCategories = (req, res) => {
   });
 };
 
+/* Create product*/
 exports.listBySearch = (req, res) => {
   let order = req.query.order ? req.query.order : "desc";
   let sortBy = req.query.order ? req.query.order : "_id";

@@ -5,6 +5,7 @@ import { Link, Redirect } from "react-router-dom";
 import { read, update, updateUser } from "./apiUser";
 
 const Profile = ({ match }) => {
+  //States
   const [values, setValues] = useState({
     name: "",
     lastname: "",
@@ -37,7 +38,7 @@ const Profile = ({ match }) => {
   const handleChange = (name) => (e) => {
     setValues({ ...values, error: false, [name]: e.target.value });
   };
-
+  // after click action
   const clickSubmit = (e) => {
     e.preventDefault();
 
@@ -58,13 +59,13 @@ const Profile = ({ match }) => {
       }
     );
   };
-
+  // after action
   const redirectUser = (success) => {
     if (success) {
       return <Redirect to="/cart" />;
     }
   };
-
+  // update form
   const profileUpdate = (name, lastname, password) => (
     <form className="container">
       <div className="form-group">

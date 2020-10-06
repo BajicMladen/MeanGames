@@ -1,5 +1,7 @@
 import { API } from "../config";
+/* ALL ADMIN REQUESTS */
 
+// post category
 export const createCategory = (userId, token, category) => {
   return fetch(`${API}/category/create/${userId}`, {
     method: "POST",
@@ -18,6 +20,7 @@ export const createCategory = (userId, token, category) => {
     });
 };
 
+// post product
 export const createProduct = (userId, token, product) => {
   return fetch(`${API}/product/create/${userId}`, {
     method: "POST",
@@ -35,6 +38,7 @@ export const createProduct = (userId, token, product) => {
     });
 };
 
+//get all categories
 export const getCategories = () => {
   return fetch(`${API}/categories`, {
     method: "GET",
@@ -47,6 +51,7 @@ export const getCategories = () => {
     });
 };
 
+// list all orders
 export const listOrders = (userId, token) => {
   return fetch(`${API}/order/list/${userId}`, {
     method: "GET",
@@ -63,6 +68,7 @@ export const listOrders = (userId, token) => {
     });
 };
 
+// get status of order
 export const getStatusValues = (userId, token) => {
   return fetch(`${API}/order/status-values/${userId}`, {
     method: "GET",
@@ -77,6 +83,7 @@ export const getStatusValues = (userId, token) => {
     .catch((err) => console.log(err));
 };
 
+// admir request for updating status of user order
 export const updateOrderStatus = (userId, token, orderId, status) => {
   return fetch(`${API}/order/${orderId}/status/${userId}`, {
     method: "PUT",
@@ -135,7 +142,7 @@ export const deleteProduct = (productId, userId, token) => {
     .catch((err) => console.log(err));
 };
 
-//update product
+//Update product
 
 export const updateProduct = (productId, userId, token, product) => {
   return fetch(`${API}/product/${productId}/${userId}`, {
@@ -151,5 +158,3 @@ export const updateProduct = (productId, userId, token, product) => {
     })
     .catch((err) => console.log(err));
 };
-
-//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

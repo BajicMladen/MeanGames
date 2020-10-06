@@ -1,7 +1,9 @@
+/* MIDDLEWARES FOR PURCHASE ROUTES  */
 const User = require("../models/user");
 const braintree = require("braintree");
 require("dotenv").config();
 
+/* Braintree credentials of sandbox account  */
 const gateway = new braintree.BraintreeGateway({
   environment: braintree.Environment.Sandbox, // Production
   merchantId: process.env.BRAINTREE_MERCHANT_ID,
@@ -19,6 +21,7 @@ exports.generateToken = (req, res) => {
   });
 };
 
+/* Checkout function */
 exports.processPayment = (req, res) => {
   let nonceFromTheClient = req.body.paymentMethodNonce;
   let amountFromTheClient = req.body.amount;

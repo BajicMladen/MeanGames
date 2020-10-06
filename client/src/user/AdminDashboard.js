@@ -1,3 +1,4 @@
+/* ADMIN DASHBOARD */
 import React from "react";
 import Layout from "../core/Layout";
 import { isAuthenticated } from "../auth/index";
@@ -6,7 +7,7 @@ const AdminDashboard = () => {
   const {
     user: { name, lastname, email, role },
   } = isAuthenticated();
-
+  // sidebar links in admin dashboard
   const adminLinks = () => {
     return (
       <div className="card text-center">
@@ -38,7 +39,7 @@ const AdminDashboard = () => {
       </div>
     );
   };
-
+  // center of page- admin info
   const adminInfo = () => {
     return (
       <div className="card mb-5 border border-primary text-center">

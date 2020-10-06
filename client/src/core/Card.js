@@ -1,3 +1,5 @@
+/* CARD LAYOUT FOR GAMES(PRODUCTS) */
+
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import ShowImage from "./ShowImage";
@@ -39,7 +41,7 @@ const Card = ({
       return <Redirect to="/cart"></Redirect>;
     }
   };
-
+  /*BUTTONS*/
   const showAddToCartBtn = (showAddToCartButton) => {
     return (
       showAddToCartButton && (
@@ -68,7 +70,7 @@ const Card = ({
       )
     );
   };
-
+  // is in stoc?
   const showStock = (quantity) => {
     return quantity > 0 ? (
       <span className="badge badge-primary ">In Stock</span>
@@ -84,7 +86,7 @@ const Card = ({
       updateItem(productId, event.target.value);
     }
   };
-
+  //Quantity  show
   const showCartUpdateOptions = (cartUpdate) => {
     return (
       cartUpdate && (

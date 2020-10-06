@@ -1,16 +1,18 @@
+/* BACKEND VALIDARION FOR SIGN-LOG IN */
+
 exports.userSignupValidator = (req, res, next) => {
-  req.check("name", "Name is reqired").notEmpty();
+  req.check("name", "Name is reqired").notEmpty(); // name check
   req
-    .check("email", "Email must be in right form")
+    .check("email", "Email must be in right form") // email check
     .matches(/.+\@.+\..+/)
     .withMessage("Email must contain @")
     .isLength({
       min: 4,
       max: 32,
     });
-  req.check("password", "Password is required").notEmpty();
+  req.check("password", "Password is required").notEmpty(); // password check
   req
-    .check("password")
+    .check("password") // password check
     .isLength({ min: 6 })
     .withMessage("Password must contain at least 6 signes")
     .matches(/\d/)

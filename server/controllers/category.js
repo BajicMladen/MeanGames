@@ -1,3 +1,5 @@
+/* MIDDLEWARES FOR CATEGORY ROUTES  */
+
 const { errorHandler } = require("../helpers/dbErrorHandler");
 const Category = require("../models/category");
 

@@ -1,3 +1,4 @@
+/*CORE REQUESTS FROM FRONTEND TO BACKEND*/
 import { API } from "../config";
 import queryString from "query-string";
 
@@ -12,7 +13,7 @@ export const getProducts = (sortBy) => {
       console.log(error);
     });
 };
-
+// get cateories
 export const getCategories = () => {
   return fetch(`${API}/categories`, {
     method: "GET",
@@ -24,7 +25,7 @@ export const getCategories = () => {
       console.log(error);
     });
 };
-
+// filter products
 export const getFilteredProducts = (skip, limit, filters = {}) => {
   const data = {
     limit,
@@ -46,7 +47,7 @@ export const getFilteredProducts = (skip, limit, filters = {}) => {
       console.log(err);
     });
 };
-
+// list products with search query
 export const list = (params) => {
   const query = queryString.stringify(params);
   console.log("query", query);
@@ -61,6 +62,7 @@ export const list = (params) => {
     });
 };
 
+//get product form productid
 export const read = (productId) => {
   return fetch(`${API}/product/${productId}`, {
     method: "GET",
@@ -71,6 +73,7 @@ export const read = (productId) => {
     .catch((err) => console.log(err));
 };
 
+// get related product
 export const listRelated = (productId) => {
   return fetch(`${API}/products/related/${productId}`, {
     method: "GET",
@@ -83,6 +86,7 @@ export const listRelated = (productId) => {
     });
 };
 
+// get token for checkot form back
 export const getBraintreeClientToken = (userId, token) => {
   return fetch(`${API}/braintree/getToken/${userId}`, {
     method: "GET",
@@ -100,6 +104,7 @@ export const getBraintreeClientToken = (userId, token) => {
     });
 };
 
+// pay request to backend
 export const processPayment = (userId, token, paymentData) => {
   return fetch(`${API}/braintree/payment/${userId}`, {
     method: "POST",
@@ -118,6 +123,7 @@ export const processPayment = (userId, token, paymentData) => {
     });
 };
 
+// post request for create order
 export const createOrder = (userId, token, creeateOrderData) => {
   return fetch(`${API}/order/create/${userId}`, {
     method: "POST",

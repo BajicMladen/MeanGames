@@ -1,3 +1,5 @@
+/*CART HELPERS AND LOCAL STORAGE ACTION*/
+
 export const addItem = (item, next) => {
   let cart = [];
   if (typeof window !== "undefined") {
@@ -17,7 +19,7 @@ export const addItem = (item, next) => {
     next();
   }
 };
-
+// get all items from storage
 export const itemTotal = () => {
   if (typeof window !== "undefined") {
     if (localStorage.getItem("cart")) {
@@ -26,7 +28,7 @@ export const itemTotal = () => {
   }
   return 0;
 };
-
+//see if cart exists
 export const getCart = () => {
   if (typeof window !== "undefined") {
     if (localStorage.getItem("cart")) {
@@ -35,7 +37,7 @@ export const getCart = () => {
   }
   return [];
 };
-
+//update item in local storage
 export const updateItem = (productId, count) => {
   let cart = [];
   if (typeof window !== "undefined") {
@@ -51,7 +53,7 @@ export const updateItem = (productId, count) => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }
 };
-
+//remove item form local storage
 export const removeItem = (productId) => {
   let cart = [];
   if (typeof window !== "undefined") {
@@ -69,6 +71,7 @@ export const removeItem = (productId) => {
   return cart;
 };
 
+// empty the cart
 export const emptyCart = (next) => {
   if (typeof window !== "undefined") {
     localStorage.removeItem("cart");

@@ -1,3 +1,4 @@
+/* PRODUCT MONGOOSE MODEL  */
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
 
@@ -41,7 +42,7 @@ const productSchema = new mongoose.Schema(
       type: Boolean,
     },
   },
-  { timestamps: true }
+  { timestamps: true } // creted at updated at
 );
 
 module.exports = mongoose.model("Product", productSchema);

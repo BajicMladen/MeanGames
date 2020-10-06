@@ -4,6 +4,7 @@ import Layout from "../core/Layout";
 import { signup } from "../auth/index";
 
 const Signup = () => {
+  //States
   const [values, setValues] = useState({
     name: "",
     lastname: "",
@@ -18,7 +19,7 @@ const Signup = () => {
   const handleChange = (name) => (event) => {
     setValues({ ...values, error: false, [name]: event.target.value });
   };
-
+  //on click function
   const clickSubmit = (event) => {
     event.preventDefault();
     setValues({ ...values, error: false });
@@ -38,7 +39,7 @@ const Signup = () => {
       }
     });
   };
-
+  // sign up form
   const singUpForm = () => (
     <div>
       <div className="col-12 text-center">
@@ -93,7 +94,7 @@ const Signup = () => {
       </div>
     </div>
   );
-
+  //error message
   const showError = () => (
     <div
       className="alert alert-danger"
@@ -102,7 +103,7 @@ const Signup = () => {
       {error}
     </div>
   );
-
+  //success message
   const showSuccess = () => (
     <div
       className="alert alert-info"

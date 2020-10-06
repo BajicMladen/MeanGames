@@ -1,3 +1,4 @@
+/* USER MONGOOSE MODEL  */
 const mongoose = require("mongoose");
 const crypto = require("crypto");
 const { v1: uuidv1 } = require("uuid");
@@ -43,7 +44,7 @@ const userShema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// virtuel field
+// virtuel field for password hashing
 
 userShema
   .virtual("password")
@@ -59,7 +60,7 @@ userShema
 userShema.methods = {
   authenticate: function (planText) {
     return this.encryptPassword(planText) == this.hashed_password;
-  },
+  }, // compare password and hashed password
 
   encryptPassword: function (password) {
     if (!password) return "";
@@ -72,7 +73,7 @@ userShema.methods = {
     } catch (err) {
       return "";
     }
-  },
+  }, // encrypt password using salt from model
 };
 
 module.exports = mongoose.model("User", userShema);

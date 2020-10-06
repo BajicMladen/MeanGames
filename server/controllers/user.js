@@ -1,7 +1,10 @@
+/* MIDDLEWARES FOR USER ROUTES  */
+
 const User = require("../models/user");
 const { Order } = require("../models/order");
 const { errorHandler } = require("../helpers/dbErrorHandler");
 
+/* Param that run on call*/
 exports.userById = (req, res, next, id) => {
   User.findById(id).exec((err, user) => {
     if (err || !user) {
@@ -14,13 +17,14 @@ exports.userById = (req, res, next, id) => {
   });
 };
 
+/* get user*/
 exports.read = (req, res) => {
   req.profile.hashed_password = undefined;
   req.profile.salt = undefined;
 
   return res.json(req.profile);
 };
-
+/* Updaste user*/
 exports.update = (req, res) => {
   User.findByIdAndUpdate(
     { _id: req.profile._id },
@@ -39,6 +43,7 @@ exports.update = (req, res) => {
   );
 };
 
+/*Add order to history*/
 exports.addOrderToUserHistory = (req, res, next) => {
   let history = [];
   req.body.order.products.forEach((item) => {
@@ -53,6 +58,7 @@ exports.addOrderToUserHistory = (req, res, next) => {
     });
   });
 
+  /* Update on user*/
   User.findOneAndUpdate(
     { _id: req.profile._id },
     { $push: { history: history } },
@@ -68,6 +74,7 @@ exports.addOrderToUserHistory = (req, res, next) => {
   );
 };
 
+/* get purchase history*/
 exports.purchaseHistory = (req, res) => {
   Order.find({ user: req.profile._id })
     .populate("user", "_id name lastname")
