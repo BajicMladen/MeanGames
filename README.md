@@ -43,7 +43,9 @@ and enjoy :)
 
 
 Thank you for interest :)
-App frontend: https://meangames.herokuapp.com/
+App: https://meangames.herokuapp.com/
+
+PS: app is not really responsive :( , but soon it wil be :)
 
 
 
